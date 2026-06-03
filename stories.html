@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملاذ | قصص واقعية</title>
+    <style>
+        /* تم إضافة خطوط زخرفية خاصة بالشعارات هنا */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700&family=Amiri+Quran&family=Reem+Kufi:wght@500;700&display=swap');
+        
+        :root { --bg-color: #121214; --card-bg: #1c1b1f; --accent-color: #d4a373; --text-main: #f4f4f6; --text-muted: #a0a0a8; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.9; padding-bottom: 60px; }
+        
+        header { background-color: rgba(28, 27, 31, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(214, 163, 115, 0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        
+        /* 👑 اللوجو المزخرف الفخم الجديد */
+        .logo { 
+            font-family: 'Amiri Quran', serif; /* خط زخرفي انسيابي عريق */
+            font-size: 34px; 
+            font-weight: 400; 
+            color: var(--accent-color); 
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(214, 163, 115, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(214, 163, 115, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.3s; padding: 5px 10px; border-radius: 5px; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); background-color: rgba(214, 163, 115, 0.05); }
+        
+        .main-content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { font-size: 22px; color: var(--accent-color); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ''; flex-grow: 1; height: 1px; background-color: rgba(214, 163, 115, 0.2); }
+        
+        /* شبكة عرض القصص المدمجة */
+        .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .story-card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s, border-color 0.3s; }
+        .story-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-meta { font-size: 12px; color: var(--accent-color); margin-bottom: 8px; }
+        .card-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
+        .card-excerpt { font-size: 14px; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 15px; }
+        .read-btn { font-size: 13px; color: var(--accent-color); font-weight: 600; align-self: flex-start; }
+
+        /* الشاشة الثانية المنبثقة (Popup Modal) */
+        .story-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 10, 12, 0.96); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
+        .story-modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background-color: var(--card-bg); max-width: 750px; width: 100%; max-height: 85vh; overflow-y: auto; border-radius: 16px; border: 1px solid rgba(214, 163, 115, 0.2); position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6); animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); } to { transform: translateY(0); } }
+        
+        .close-btn { position: absolute; top: 15px; left: 15px; background-color: rgba(0, 0, 0, 0.5); color: #fff; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 10; transition: background 0.3s; }
+        .close-btn:hover { background-color: var(--accent-color); color: #121214; }
+        
+        .modal-img { width: 100%; height: 350px; object-fit: cover; }
+        .modal-body { padding: 30px; }
+        .modal-title { font-size: 24px; color: var(--text-main); margin-bottom: 10px; font-weight: 700; }
+        .modal-meta { color: var(--accent-color); font-size: 13px; margin-bottom: 20px; display: block; }
+        .modal-text { font-size: 16px; color: #e2e2e8; text-align: justify; white-space: pre-line; line-height: 2; }
+        .bold-intro { color: var(--accent-color); font-weight: 600; }
+
+        @media (max-width: 768px) { .nav-container { flex-direction: column; gap: 15px; } .modal-img { height: 200px; } .modal-title { font-size: 19px; } .modal-body { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <!-- كلمة ملاذ بالخط الزخرفي والتأثير المضيء -->
+            <a href="index.html" class="logo">ملاذ</a>
+            <nav class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="stories.html" class="active">قصص واقعية</a>
+                <a href="awareness.html">ثقافة وتوعية</a>
+                <a href="about.html">من نحن</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h2 class="section-title">حكايات وقصص واقعية اضغط </h2>
+        
+        <div class="stories-grid" id="storiesGrid">
+            <!-- سيتم توليد الـ 12 قصة بالصور تلقائياً هنا عبر الجافا سكريبت لسرعة وكفاءة التصفح -->
+        </div>
+    </div>
+
+    <!-- 📺 الشاشة الثانية المنبثقة لعرض تفاصيل القصة والصورة كاملة -->
+    <div class="story-modal" id="storyModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeStory()">✕</button>
+            <img src="" id="modalImage" class="modal-img">
+            <div class="modal-body">
+                <span id="modalMeta" class="modal-meta"></span>
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <p id="modalText" class="modal-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // مصفوفة تحتوي على الـ 12 قصة بالكامل مع صور احترافية مخصصة وعالية الجودة لكل منها
+        const storiesData = [
+            {
+                title: "1. ليلة الخريف الدافئة: كسر حاجز الروتين الجاف",
+                meta: "⏱️ 5 دقائق قراءة • 🔥 قصة واقعية",
+                excerpt: "بعد سنوات من الزواج، تسلل البرود إلى تفاصيل كرم وسارة اليومية. لم تكن هناك خلافات، بل صمت روتيني قاتل...",
+                image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800",
+                text: "بعد سنوات من الزواج، تسلل البرود إلى تفاصيل كرم وسارة اليومية. لم تكن هناك خلافات، بل صمت روتيني قاتل. في ليلة خريفية دافئة، قررت سارة كسر الصمت؛ أغلقت الهواتف، وأشعلت إضاءة خافتة، وبدأت بسؤال رقيق عن ذكريات ليلتهم الأولى معاً. هذا الحوار الهادئ الخالي من اللوم فتح القلوب، وأعاد إشعال الشغف العاطفي والجسدي الذي غاب وسط مشاغل الحياة الضاغطة."
+            },
+            {
+                title: "2. تجديد العهد: عندما تصبح الصراحة الجريئة مفتاح المتعة",
+                meta: "⏱️ 6 دقائق قراءة • 🔥 جرأة ووعي (للمتزوجين)",
+                excerpt: "عاش ماجد ومنى خمس سنوات في زواج مستقر، لكن منى كانت تعاني من خجل مفرط يمنعها من التعبير عما يريحها...",
+                image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800",
+                text: "عاش ماجد ومنى خمس سنوات في زواج مستقر، لكن منى كانت تعاني من خجل مفرط يمنعها من التعبير عما يريحها أو يسعدها حقاً أثناء اللقاء الحميم، مما جعلها تتظاهر بالرضا دائماً. بعد استشارة نفسية، قررت منى التخلي عن خجلها السلبي وبدأت بمصارحة زوجها في لحظة صفاء كاملة عما تحتاجه جسدياً وعاطفياً للوصول إلى الإشباع. ماجد استقبل جرأتها اللطيفة بترحيب وشغف كبير، وتلك المكاشفة الحميمة غيرت جودة علاقتهما تماماً وعمّقت ارتباطهما الجسدي."
+            },
+            {
+                title: "3. لغة العطور المفقودة: رحلة استعادة الانجذاب البصري",
+                meta: "⏱️ 4 دقائق قراءة • 🔥 قصة واقعية",
+                excerpt: "أهمل طارق مظهره بعد زيادة وزنه، وانشغلت رانيا بملابس المنزل التقليدية، مما خلق تباعداً غير منطوق بينهما...",
+                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800",
+                text: "أهمل طارق مظهره بعد زيادة وزنه، وانشغلت رانيا بملابس المنزل التقليدية، مما خلق تباعداً غير منطوق بينهما. بدأت رانيا المبادرة, فاشترت عطراً فرنسياً مثيراً، وارتدت ملابس ناعمة وأنيقة تبرز تفاصيلها، مع تغيير إضاءة الغرفة إلى الأحمر الدافئ. هذا التحول البصري المفاجئ أيقظ حواس طارق من جديد، وجعله يستوعب أن الانجذاب الحسي يبدأ من العين والأنف قبل كل شيء."
+            },
+            {
+                title: "4. الاعتراف المتبادل: تحطيم جدار التوقعات الخاطئة",
+                meta: "⏱️ 7 دقائق قراءة • 🔥 جرأة وسيكولوجية",
+                excerpt: "كان هاني يعتقد أن الرجولة في العلاقة الحميمة تعتمد على السرعة والقوة فقط، بناءً على مفاهيم مغلوطة...",
+                image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800",
+                text: "كان هاني يعتقد أن الرجولة في العلاقة الحميمة تعتمد على السرعة والقوة فقط، بناءً على مفاهيم مغلوطة، بينما كانت زوجته علا تشعر بالإحباط لعدم مراعاة رغبتها وتدرجها الحسي. في مواجهة جريئة وصادقة، طلبت علا من هاني التوقف والبدء بـ \"التهيئة العاطفية واللمس اللطيف\" لفترة كافية قبل اللقاء. هذا الاعتراف الجريء عدّل بوصلة هاني، وجعله يدرك أن متعة زوجته وإشباعها هما المقياس الحقيقي لنجاح العلاقة الزوجية."
+            },
+            {
+                title: "5. الرسالة النصية الجريئة: إشعال اللهفة عن بعد",
+                meta: "⏱️ 5 دقائق قراءة • 🔥 حكايات واقعية",
+                excerpt: "في منتصف يوم عمل شاق ومزدحم، استقبل وائل رسالة نصية غير متوقعة من زوجته لمياء، تعبر فيها بجرأة...",
+                image: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=800",
+                text: "في منتصف يوم عمل شاق ومزدحم، استقبل وائل رسالة نصية غير متوقعة من زوجته لمياء، تعبر فيها بجرأة ووضوح عن شوقها للقائه الحميم في المساء وتصف شعورها بكلمات دافئة. هذه الرسالة غيّرت مزاج وائل طوال اليوم، وجعلته يعود إلى المنزل بلهفة وشوق مضاعف، مما يثبت أن إثارة الشريك ذهنياً وعاطفياً خلال النهار هي الوقود الحقيقي لليلة ناجحة."
+            },
+            {
+                title: "6. ليلة المصارحة بعد الأزمة: بناء الأمان من جديد",
+                meta: "⏱️ 8 دقائق قراءة • 🔥 قصة واقعية عميقة",
+                excerpt: "بعد اكتشاف تواصل زوجها الإلكتروني العابر مع أخرى، مر زواج إيمان وسامح بأزمة ثقة خانقة وصعبة للتعافي...",
+                image: "https://images.unsplash.com/photo-1507504038482-7621c37b2f1d?q=80&w=800",
+                text: "بعد اكتشاف تواصل زوجها الإلكتروني العابر مع أخرى، مر زواج إيمان وسامح بأزمة ثقة خانقة. للتعافي، خاضا ليلة مواجهة طويلة واجهت فيها إيمان زوجها بأسئلة جريئة عن النقص الذي شعر به. اعترف سامح بضعفه، واتفقا على فتح صفحة جديدة مبنية على المكاشفة المطلقة لكل المشاعر والمخاوف دون إخفاء، ليعود الأمان تدريجياً لبيتهم الحميم."
+            },
+            {
+                title: "7. التغلب على تشنج الخوف: رحلة ليلة الدخلة المؤجلة",
+                meta: "⏱️ 9 دقائق قراءة • 🔥 جرأة وتوعية طبية",
+                excerpt: "عانى رامي وهدير من مشكلة عدم اكتمال اللقاء الحميم لمدة شهرين بعد زفافهما بسبب تشنج مهبلي ناتج عن الخوف...",
+                image: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?q=80&w=800",
+                text: "عانى رامي وهدير من مشكلة عدم اكتمال اللقاء الحميم لمدة شهرين بعد زفافهما بسبب تشنج مهبلي ناتج عن خوف هدير من الأفكار والموروثات الخاطئة. بدلاً من الغضب، أبدى رامي تفهماً واستيعاباً كبيراً، وبدآ معاً رحلة قراءة وتوعية، والاعتماد التام على المداعبات الطويلة والتهيئة النفسية والجسدية لإزالة التوتر، حتى تلاشى الخوف تماماً واكتمل لقاؤهما بنجاح وحب شهواني راقٍ."
+            },
+            {
+                title: "8. كسر روتين المكان: ليلة الفندق الاستثنائية",
+                meta: "⏱️ 5 دقائق قراءة • 🔥 حكايات واقعية",
+                excerpt: "أدرك يوسف وسميرة أن روتين غرفة النوم وضغوط الأبناء في المنزل أصبحا يفسدان خلوتهما الحميمة والعاطفية...",
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800",
+                text: "أدرك يوسف وسميرة أن روتين غرفة النوم وضغوط الأبناء في المنزل أصبحا يفسدان خلوتهما الحميمة. قرر يوسف حجز غرفة في فندق هادئ بعيداً عن الصخب لليلة واحدة. تغيير البيئة والمكان، مع التفرغ التام لبعضهما البعض بدون مسببات قلق، أعاد لهما شعور أيام الخطوبة الأولى والشغف والتحرر الجسدي المتجدد كلياً."
+            },
+            {
+                title: "9. ثقافة الاعتذار الجسدي: إنهاء الخلاف بالحضان الدافئ",
+                meta: "⏱️ 4 دقائق قراءة • 🔥 قصة واقعية",
+                excerpt: "بعد مشادة كلامية حادة دامت لساعات بين أحمد ومي، ساد الصمت الثقيل غرفتهما. بدلاً من النوم المتباعد بدا العناد...",
+                image: "https://images.unsplash.com/photo-1516589091380-5d8e87df6999?q=80&w=800",
+                text: "بعد مشادة كلامية حادة دامت لساعات بين أحمد ومي، ساد الصمت الثقيل غرفتهما. بدلاً من النوم بظهر ممدود متباعد، بادر أحمد بضم زوجته بجرأة وحنان من الخلف دون حديث في الفراش. هذا الاحتضان الجسدي الدافئ أذاب جبال العناد، وتُرجم كاعتذار صامت، لتنتهي الليلة بحوار هادئ وتصالح حميم أثبت أن القرب الجسدي يداوي ما تفسده الكلمات."
+            },
+            {
+                title: "10. السكوت لا يحمي البيوت: ليلة الرفض والحوار الحساس",
+                meta: "⏱️ 6 دقائق قراءة • 🔥 جرأة وسلوك",
+                excerpt: "كانت نجوى تشعر بالإرهاق الشديد وتجبر نفسها على اللقاء الحميم لمجرد إرضاء زوجها خالد، مما سبب لها نفوراً...",
+                image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=800",
+                text: "كانت نجوى تشعر بالإرهاق الشديد وتجبر نفسها على اللقاء الحميم لمجرد إرضاء زوجها خالد، مما جعلها تشعر بالنفور بمرور الوقت. قررت التحدث بجرأة وحب: \"أنا أحبك وأرغب بك، ولكن جسدي يحتاج للراحة الليلة ليكون بكامل شغفه غداً\". تفهّم خالد الأمر، وتعلما معاً أن رفض اللقاء لسبب صحي أو نفسي بحوار لطيف أفضل بكثير من القبول البارد الذي يقتل الشغف الجنسي."
+            },
+            {
+                title: "11. الشغف بعد الأربعين: نضج المشاعر واكتمال المتعة",
+                meta: "⏱️ 5 دقائق قراءة • 🔥 حكايات واقعية",
+                excerpt: "ظن سعيد وهناء أن مشاعر الحب واللقاء الحميم تتقلص بعد تجاوز سن الأربعين، لكنهما اكتشفا نضجاً مختلفاً...",
+                image: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?q=80&w=800",
+                text: "ظن سعيد وهناء أن مشاعر الحب واللقاء الحميم تتقلص بعد تجاوز سن الأربعين. لكنهما اكتشفا أن النضج النفسي وفهم كل منهما لطبيعة وجسد الآخر عبر السنين جعل علاقتهما الحميمة أكثر هدوءاً، عمقاً، وإشباعاً من ذي قبل، متحررين تماماً من قلق البدايات الخاطئ والسرعة."
+            },
+            {
+                title: "12. ليلة التخلي عن الأقنعة: مواجهة الرغبات المدفونة",
+                meta: "⏱️ 7 دقائق قراءة • 🔥 جرأة مطلقة (للمتزوجين)",
+                excerpt: "في ليلة مصارحة استثنائية، اتفق كريم وعليا على كتابة رغباتهما الحميمة وتخيلاتهما لتطوير العلاقة في أوراق...",
+                image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800",
+                text: "في ليلة مصارحة استثنائية، اتفق كريم وعليا على كتابة رغباتهما الحميمة وتخيلاتهما لتطوير العلاقة في أوراق مغلقة وقراءتها معاً بدون أحكام مسبقة أو خجل سلبي. الجرأة في كشف التخيلات الرومانسية والجسدية المدفونة بينهما أزالت الحواجز تماماً، وعاشا ليلة فريدة من الاندماج الجسدي الفاخر القائم على التفاهم والتحرر الكامل من الخوف والقيود النفسية."
+            }
+        ];
+
+        // توليد الكروت تلقائياً في شبكة العرض
+        const grid = document.getElementById('storiesGrid');
+        storiesData.forEach((story, index) => {
+            const card = document.createElement('div');
+            card.className = 'story-card';
+            card.setAttribute('onclick', `openStory(${index})`);
+            card.innerHTML = `
+                <img src="${story.image}" class="card-img" alt="${story.title}">
+                <div class="card-body">
+                    <span class="card-meta">${story.meta}</span>
+                    <h3 class="card-title">${story.title}</h3>
+                    <p class="card-excerpt">${story.excerpt}</p>
+                    <span class="read-btn">اقرأ القصة كاملة ←</span>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // دوال التحكم بالشاشة الثانية لعرض القصة والصورة
+        const modal = document.getElementById('storyModal');
+        
+        function openStory(index) {
+            const story = storiesData[index];
+            document.getElementById('modalImage').src = story.image;
+            document.getElementById('modalMeta').innerText = story.meta;
+            document.getElementById('modalTitle').innerText = story.title;
+            document.getElementById('modalText').innerText = story.text;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeStory() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeStory();
+            }
+        });
+    </script>
+</body>
+</html>
