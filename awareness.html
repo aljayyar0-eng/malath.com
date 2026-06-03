@@ -4,26 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملاذ | ثقافة وتوعية</title>
+    
+    <!-- 💰 كود Google AdSense للمراجعة والإعلانات المأخوذ من الشاشة image_a4ae47.png -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934345630453593" crossorigin="anonymous"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700&family=Amiri+Quran&display=swap');
         :root { --bg-color: #121214; --card-bg: #1c1b1f; --accent-color: #d4a373; --text-main: #f4f4f6; --text-muted: #a0a0a8; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.9; padding-bottom: 60px; }
         header { background-color: rgba(28, 27, 31, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(214, 163, 115, 0.1); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { font-size: 26px; font-weight: 700; color: var(--accent-color); text-decoration: none; }
-        .nav-links { display: flex; gap: 20px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        .logo { font-family: 'Amiri Quran', serif; font-size: 34px; font-weight: 400; color: var(--accent-color); text-decoration: none; text-shadow: 0 0 10px rgba(214, 163, 115, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.8); transition: transform 0.3s ease, text-shadow 0.3s ease; display: inline-block; }
+        .logo:hover { transform: scale(1.05); text-shadow: 0 0 20px rgba(214, 163, 115, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         .nav-links a { color: var(--text-main); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.3s; padding: 5px 10px; border-radius: 5px; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); background-color: rgba(214, 163, 115, 0.05); }
         .main-content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .section-title { font-size: 22px; color: var(--accent-color); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
         .section-title::after { content: ''; flex-grow: 1; height: 1px; background-color: rgba(214, 163, 115, 0.2); }
-        .article-block { background-color: var(--card-bg); padding: 35px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.02); margin-bottom: 40px; }
-        .art-title { font-size: 24px; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
-        .art-meta { color: var(--accent-color); font-size: 13px; margin-bottom: 20px; }
-        .art-text { font-size: 16px; color: #e2e2e8; text-align: justify; white-space: pre-line; }
-        .focus-box { background-color: rgba(214, 163, 115, 0.05); border-right: 4px solid var(--accent-color); padding: 15px; margin: 15px 0; border-radius: 4px; }
-        @media (max-width: 768px) { .nav-container { flex-direction: column; gap: 15px; } .art-title { font-size: 19px; } }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .article-card { background-color: var(--card-bg); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.03); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s, border-color 0.3s; }
+        .article-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-meta { font-size: 12px; color: var(--accent-color); margin-bottom: 8px; }
+        .card-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
+        .card-excerpt { font-size: 14px; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 15px; }
+        .read-btn { font-size: 13px; color: var(--accent-color); font-weight: 600; align-self: flex-start; }
+        .story-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 10, 12, 0.96); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
+        .story-modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background-color: var(--card-bg); max-width: 750px; width: 100%; max-height: 85vh; overflow-y: auto; border-radius: 16px; border: 1px solid rgba(214, 163, 115, 0.2); position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6); animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(30px); } to { transform: translateY(0); } }
+        .close-btn { position: absolute; top: 15px; left: 15px; background-color: rgba(0, 0, 0, 0.5); color: #fff; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; z-index: 10; transition: background 0.3s; }
+        .close-btn:hover { background-color: var(--accent-color); color: #121214; }
+        .modal-img { width: 100%; height: 350px; object-fit: cover; }
+        .modal-body { padding: 30px; }
+        .modal-title { font-size: 24px; color: var(--text-main); margin-bottom: 10px; font-weight: 700; }
+        .modal-meta { color: var(--accent-color); font-size: 13px; margin-bottom: 20px; display: block; }
+        .modal-text { font-size: 16px; color: #e2e2e8; text-align: justify; white-space: pre-line; line-height: 2; }
+        @media (max-width: 768px) { .nav-container { flex-direction: column; gap: 15px; } .modal-img { height: 200px; } .modal-title { font-size: 19px; } .modal-body { padding: 20px; } }
     </style>
 </head>
 <body>
@@ -38,86 +58,55 @@
             </nav>
         </div>
     </header>
-
     <div class="main-content">
-        <h2 class="section-title">مقالات الثقافة الزوجية وسيكولوجية العلاقة الحميمة (11 مقالاً)</h2>
-        
-        <!-- مقال 1 -->
-        <article class="article-block">
-            <h3 class="art-title">1. لغة الجسد غير المنطوقة: تهيئة الرغبة طوال اليوم</h3>
-            <div class="art-meta">⏱️ 4 دقائق قراءة • 💡 ثقافة وتوعية</div>
-            <p class="art-text">العلاقة الحميمة الناجحة لا تبدأ فور غلق باب الغرفة، بل تُبنى على مدار اليوم بالكامل. النظرة الممتنة، اللمسة العفوية العابرة أثناء انشغال الشريك، والكلمة الرقيقة المليئة بالغزل المبطن تصنع تهيئة نفسية وعاطفية ترفع من منسوب الرغبة والانسجام التام عند اللقاء المسائي.</p>
-        </article>
-
-        <!-- مقال 2 -->
-        <article class="article-block">
-            <h3 class="art-title">2. سر الدقائق الخمس بعد اللقاء الحميم: هرمون الارتباط</h3>
-            <div class="art-meta">⏱️ 5 دقائق قراءة • 💡 سيكولوجية جريئة</div>
-            <p class="art-text">تُظهر الدراسات النفسية أن الدقائق التي تلي انتهاء العلاقة الجسدية مباشرة هي الأهم لتعميق الأمان النفسي. إن الانسحاب السريع أو النوم الفوري يعطي شعوراً سلبياً بالوحدة للشريك. بينما يساهم الاحتضان، والمسح على الشعر، وكلمات الشكر الدافئة في تحفيز إفراز هرمون الأوكسيتوسين (هرمون الارتباط العاطفي)، مما يحول العلاقة من مجرد تواصل جسدي إلى اندماج روحي دائم.</p>
-        </article>
-
-        <!-- مقال 3 -->
-        <article class="article-block">
-            <h3 class="art-title">3. سيكولوجية المداعبة: لماذا تحتاج المرأة وقتاً أطول؟</h3>
-            <div class="art-meta">⏱️ 6 دقائق قراءة • 💡 علم وتوعية جادة</div>
-            <p class="art-text">من أكبر الأخطاء الشائعة استعجال اللقاء الحميم دون تهيئة كافية. يختلف المنحنى الحسي للمرأة عن الرجل؛ فالرجل يثار سريعاً بينما تحتاج المرأة إلى تدرج حسي وعاطفي مستمر يعتمد على الكلمات، القبلات، واللمسات اللطيفة لفترة لا تقل عن 15 إلى 20 دقيقة لتصل لدرجة الاستعداد والانسجام الجسدي والنفسي الكامل.</p>
-        </article>
-
-        <!-- مقال 4 -->
-        <article class="article-block">
-            <h3 class="art-title">4. كسر الخجل السلبي: كيف تتحدثين عن رغباتك بذكاء؟</h3>
-            <div class="art-meta">⏱️ 5 دقائق قراءة • 💡 إرشاد زوجي جريء</div>
-            <p class="art-text">الخجل في العلاقة الزوجية مطلوب، لكن الخجل الذي يمنع التعبير عن الارتياح أو الألم يفسد المتعة المشتركة. يمكنك كسر هذا الحاجز دون جرح رجولة الطرف الآخر عبر استخدام أسلوب "التوجيه الإيجابي اللطيف" أثناء اللقاء، مثل قول: "أحب هذا الأسلوب كثيراً فهو يسعدني" بدلاً من الصمت الكتمان السلبي.</p>
-        </article>
-
-        <!-- مقال 5 -->
-        <article class="article-block">
-            <h3 class="art-title">5. تأثير التوتر والضغوط المالية على الكفاءة الحميمة</h3>
-            <div class="art-meta">⏱️ 4 دقائق قراءة • 💡 صحة نفسية</div>
-            <p class="art-text">الدماغ هو العضو الجنسي الأكبر في جسم الإنسان. عندما يقع الرجل تحت وطأة ضغوط مالية أو مهنية شديدة، يفرز الجسم هرمون الكورتيزول الذي يثبط الرغبة والكفاءة الجسدية تماماً. هنا يأتي دور الشريك في تخفيف حدة القلق واحتواء الضغوط النفسية لإعادة التوازن العاطفي.</p>
-        </article>
-
-        <!-- مقال 6 -->
-        <article class="article-block">
-            <h3 class="art-title">6. أهمية الخلوة البصرية: عزل المشتتات الرقمية</h3>
-            <div class="art-meta">⏱️ 4 دقائق قراءة • 💡 ثقافة وتوعية</div>
-            <p class="art-text">الهواتف الذكية والتصفح المستمر لوسائل التواصل داخل غرفة النوم يصنعان ما يسمى بـ "الطلاق العاطفي الصامت". تخصيص ساعة كاملة يومياً قبل النوم بدون شاشات يتيح فرصة حقيقية للتواصل البصري، والحديث الحميم، وتبادل المشاعر الصادقة والدافئة بين الزوجين.</p>
-        </article>
-
-        <!-- مقال 7 -->
-        <article class="article-block">
-            <h3 class="art-title">7. فهم الاختلاف في معدل الرغبة بين الطرفين</h3>
-            <div class="art-meta">⏱️ 6 دقائق قراءة • 💡 مقال جريء وعلمي</div>
-            <p class="art-text">من الطبيعي جداً أن تختلف معدلات الرغبة في اللقاء الحميم بين الزوجين نتيجة لاختلاف الهرمونات، العمر، وضغوط اليوم. الحل لا يكمن في فرض الرغبة أو اتهام الطرف الآخر بالبرود، بل في الحوار المتفهم، والوصول إلى منطقة وسطى وتوافق يحترم طاقة واحتياجات كل طرف الجسدية والنفسية.</p>
-        </article>
-
-        <!-- مقال 8 -->
-        <article class="article-block">
-            <h3 class="art-title">8. الرياضة والتغذية: وقود الشغف والأداء الجسدي المستدام</h3>
-            <div class="art-meta">⏱️ 5 دقائق قراءة • 💡 صحة عامة</div>
-            <p class="art-text">تنشيط الدورة الدموية عبر التمارين الرياضية المنتظمة، وتناول الأغذية الغنية بمضادات الأكسدة والدهون الصحية، ترفع مستويات هرمون التستوستيرون والاستروجين بشكل طبيعي. الصحة الجسدية الجيدة تنعكس مباشرة على مستويات الطاقة، الرغبة، والتحمل أثناء اللقاء الحميم.</p>
-        </article>
-
-        <!-- مقال 9 -->
-        <article class="article-block">
-            <h3 class="art-title">9. أثر الكلمات الجريئة والهمس أثناء العلاقة</h3>
-            <div class="art-meta">⏱️ 4 دقائق قراءة • 💡 سيكولوجية جريئة</div>
-            <p class="art-text"><div class="focus-box">معلومة هامة: حاسة السمع شريك أساسي في الإثارة.</div> الهمس بكلمات الغزل الصريحة، والتعبير اللفظي الجريء عن الإعجاب بجسد الشريك وتفاصيل أدائه أثناء اللقاء الحميم، يضاعف المتعة الذهنية ويزيل التوتر، مما يرفع الاستجابة الجسدية لكلا الطرفين بشكل مذهل.</p>
-        </article>
-
-        <!-- مقال 10 -->
-        <article class="article-block">
-            <h3 class="art-title">10. كسر نمطية الأوضاع الحميمة لتفادي الملل الزوجي</h3>
-            <div class="art-meta">⏱️ 6 دقائق قراءة • 💡 إرشاد جريء للمتزوجين</div>
-            <p class="art-text">التكرار والاعتماد التام على نفس الوضعية والمكان والتوقيت لسنوات يصيب العلاقة الحميمة بـ "الملل الوظيفي". التغيير والتجديد في الأوضاع الجسدية بحسب ما يريح الطرفين، واكتشاف أساليب تواصل جديدة، يكسر هذا الروتين ويعيد الإثارة والشغف والاستكشاف للعلاقة من جديد.</p>
-        </article>
-
-        <!-- مقال 11 -->
-        <article class="article-block">
-            <h3 class="art-title">11. الأمان العاطفي: الشرط الأساسي للاستسلام الجسدي الكامل</h3>
-            <div class="art-meta">⏱️ 5 دقائق قراءة • 💡 ثقافة وتوعية</div>
-            <p class="art-text">لا يمكن للمرأة تحديداً، وللإنسان عموماً، الوصول إلى قمة الاستمتاع والاستسلام الجسدي الكامل في العلاقة الحميمة دون الشعور بالأمان العاطفي المسبق. الاحترام المتبادل، والتقدير، وغياب التهديد أو النقد الجارح لعيوب الجسد هي الركائز الأساسية التي تفتح أبواب المتعة الحقيقية.</p>
-        </article>
+        <h2 class="section-title">دليل التوعية والثقافة الثنائية (اضغط لقراءة المقال كاملاً)</h2>
+        <div class="articles-grid" id="articlesGrid"></div>
     </div>
+    <div class="story-modal" id="storyModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeStory()">✕</button>
+            <img src="" id="modalImage" class="modal-img">
+            <div class="modal-body">
+                <span id="modalMeta" class="modal-meta"></span>
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <p id="modalText" class="modal-text"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const articlesData = [
+            { title: "1. سيكولوجية الاحتياج: فهم الفروق الفردية بين الرجل والمرأة", meta: "⏱️ 6 دقائق قراءة • 💡 مقال علمي", excerpt: "يخطئ الكثير من الأزواج عندما يظنون أن احتياجات الطرف الآخر تطابق احتياجاتهم تماماً، فالرجل يبحث عن الثقة والتقدير أولاً...", image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800", text: "يخطئ الكثير من الأزواج عندما يظنون أن احتياجات الطرف الآخر تطابق احتياجاتهم تماماً. سيكولوجياً، يبحث الرجل عن الثقة، التقدير، والقبول الجسدي كأولويات أساسية تشعره برجولته. بينما تحتاج المرأة بالدرجة الأولى إلى الأمان العاطفي، الإنصات والاهتمام بالتفاصيل الصغيرة قبل أي لقاء حميم. فهم هذه الفروق الجذرية يختصر سنوات من الخلافات غير المبررة ويفتح الباب لاندماج متناغم وشراكة مشبعة للطرفين." },
+            { title: "2. لغة الجسد في غرفة النوم: كيف تقرأ رغبات الشريك الصامتة؟", meta: "⏱️ 5 دقائق قراءة • 💡 لغة الجسد والوعي", excerpt: "التواصل غير اللفظي يمثل أكثر من 70% من جودة العلاقة الحميمة، فنظرة العين، ونبرة الصوت، وطريقة التنفس تدل بشكل قاطع على...", image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800", text: "التواصل غير اللفظي يمثل أكثر من 70% من جودة العلاقة الحميمة بين المتزوجين. نظرات العين الممتدة، ونبرة الصوت الهادئة، وتسارع الأنفاس، وطريقة الاستجابة للمسات، كلها علامات وجسورة تدل على مدى راحة الشريك واستمتاعه أو انزعاجه الصامت. التدرب على ملاحظة هذه التغييرات الفسيولوجية الصغيرة يساعد الطرفين على تعديل إيقاع اللقاء الحميمي بسلاسة ودون الحاجة للكلام الحرج، مما يزيد من مستويات الإشباع والتوافق الجسدي." },
+            { title: "3. التهيئة العاطفية: الوقود الخفي لإشعال الشغف المستدام", meta: "⏱️ 7 دقائق قراءة • 💡 إرشاد زواجي", excerpt: "العلاقة الحميمة الناجحة لا تبدأ في فراش الزوجية، بل تبدأ منذ الصباح؛ بكلمة غزل عابرة، بلمسة لطيفة، أو برسالة نصية مشوقة...", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=800", text: "العلاقة الحميمة الناجحة لا تبدأ في فراش الزوجية، بل تبدأ منذ الصباح؛ بكلمة غزل عابرة، بلمسة لطيفة أثناء شرب القهوة، أو برسالة نصية مشوقة في منتصف العمل. هذه التصرفات تسمى علمياً بـ \"التهيئة العاطفية والذهنية\"، وهي ضرورية جداً خاصة للمرأة التي تحتاج إلى شحن عاطفي طويل المدى لتصل إلى الجاهزية الجسدية الكاملة. إهمال هذه التهيئة يجعل العلاقة ميكانيكية جافة تفقد بريقها بسرعة مع مرور الوقت." },
+            { title: "4. التغلب على الخجل السلبي: خطوات واثقة نحو التحرر الحميم", meta: "⏱️ 6 دقائق قراءة • 💡 سيكولوجية العلاقات", excerpt: "الخجل مطلوب ومحبب في بدايات الزواج، لكن تحوله إلى حواجز تمنع التعبير عن الرغبات الجسدية يصبح عائقاً أساسياً أمام التوافق...", image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800", text: "الخجل مطلوب ومحبب في بدايات الزواج، لكن تحوله لاحقاً إلى حواجز تمنع التعبير عن الرغبات والمخاوف الجسدية يصبح عائقاً أساسياً أمام التوافق الحميم. التحرر الحميم الواعي يعني قدرة الزوجين على مناقشة ما يسعدهما وما يزعجهما في الفراش بكل وضوح وبدون شعور بالذنب أو الانتقاص. يبدأ التغلب على هذا الخجل تدريجياً عبر الحوار المتبادل في أوقات الصفاء، ومشاركة الخيالات الرومانسية اللطيفة لتقليص الفجوة النفسية." },
+            { title: "5. إدارة الملل الفراشي: أفكار مبتكرة لتجديد طاقة اللقاء", meta: "⏱️ 8 دقائق قراءة • 💡 حلول عملية", excerpt: "تكرار نفس التفاصيل والأساليب والأوقات في العلاقة الزوجية يؤدي حتماً إلى تراجع اللهفة، والحل يكمن في إدخال عناصر تجديد...", image: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=800", text: "تكرار نفس التفاصيل، الأساليب، والأوقات في العلاقة الزوجية لسنوات طويلة يؤدي حتماً إلى تراجع اللهفة ودخول العلاقة في مرحلة الصيانة الروتينية الباردة. الحل يكمن في كسر الأنماط المعتادة بجرأة ووعي؛ مثل تغيير ديكور وإضاءة الغرفة، تجربة عطور حسية فريدة، كسر روتين الوقت والمكان، والتركيز على المداعبات الطويلة وإطالة فترة التلاحم العاطفي والجسدي لإيقاظ الحواس وإعادة إشعال الشغف الذي خمد بسبب مشاغل الحياة اليومية." },
+            { title: "6. الأمان النفسي: الحصن الأول لحماية جودة العلاقة الخاصة", meta: "⏱️ 5 دقائق قراءة • 💡 صحة نفسية وزوجية", excerpt: "لا يمكن للجسد أن يستسلم للمتعة الكاملة ما لم يكن الذهن مستقراً ومطمئناً تماماً، فالانتقادات المستمرة والخلافات المعلقة...", image: "https://images.unsplash.com/photo-1507504038482-7621c37b2f1d?q=80&w=800", text: "لا يمكن للجسد أن يستسلم للمتعة الكاملة والاندماج الكامل ما لم يكن الذهن مستقراً ومطمئناً تماماً. الانتقادات المستمرة، لوم الشريك على عيوب مظهرية أو أداء جسدي، والخلافات المعلقة خارج الغرفة تترجم فوراً داخل الفراش على شكل برود جنسي أو ضعف رغبة وتشنج. بناء الأمان النفسي عبر الكلمات الداعمة، الاحتضان اليومي غير المشروط باللقاء، والثناء على مواطن الجمال في الشريك هو الأساس المتين لحياة حميمة قوية ومستدامة." },
+            { title: "7. هرمونات السعادة: كيف تؤثر العلاقة الحميمة على صحتك النفسية؟", meta: "⏱️ 6 دقائق قراءة • 💡 وعي طبي وصحي", excerpt: "اللقاء الحميم الفاخر والناجح ليس مجرد متعة عابرة، بل هو عملية بيولوجية متكاملة تفرز كميات هائلة من هرمونات الأوكسيتوسين...", image: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?q=80&w=800", text: "اللقاء الحميم الناجح والمشبع ليس مجرد متعة جسدية عابرة، بل هو عملية بيولوجية متكاملة تفرز في الجسم كميات هائلة من هرمونات الأوكسيتوسين (هرمون الارتباط والضم) والإندورفين والدوبامين. هذه الهرمونات تعمل بشكل فوري كمسكنات طبيعية للتوتر والاضطرابات النفسية، وتمنح الزوجين شعوراً عميقاً بالسلام الداخلي والرضا، وتنعكس إيجابياً على مرونة التعامل مع ضغوطات العمل والحياة اليومية المشتركة." },
+            { title: "8. التواصل الذكي بعد اللقاء: اللحظات التي تصنع فارق الارتباط", meta: "⏱️ 5 دقائق قراءة • 💡 إرشاد سلوكي", excerpt: "يخطئ الكثيرون بالانسحاب الفوري أو النوم مباشرة بعد انتهاء العلاقة الحميمة، فالأبحاث تؤكد أن الدقائق العشر التالية هي الأكثر...", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800", text: "يخطئ الكثير من الأزواج بالانسحاب الفوري، الذهاب للاستحمام أو النوم السريع مباشرة بعد انتهاء العلاقة الحميمة. تؤكد الأبحاث السيكولوجية أن الدقائق العشر التالية للقاء (Post-coital time) هي الأكثر أهمية لتثبيت الارتباط العاطفي. البقاء متلاحمين، تبادل اللمسات الهادئة، الكلمات الرقيقة، والقبلات الصامتة يشعر المرأة بالأمان المطلق وأنها مرغوبة لذاتها وليس فقط كغاية جسدية، مما يعمق أواصر الود والاتصال النفسي." },
+            { title: "9. وعي المؤشرات: متى تحتاج العلاقة الزوجية لتدخل استشاري؟", meta: "⏱️ 7 دقائق قراءة • 💡 توعية وإرشاد", excerpt: "الصمت الطويل، غياب اللقاء الحميم لأسابيع دون سبب طبي، وتحول النقاشات العادية إلى معارك تكسير عظام هي علامات خطر...", image: "https://images.unsplash.com/photo-1516589091300-5d8e87df6999?q=80&w=800", text: "الصمت الطويل بين الزوجين، غياب اللقاء الحميم أو الملامسات الجسدية لأسابيع ممتدة دون سبب طبي أو سفر، وتحول النقاشات العادية إلى معارك تكسير عظام، كلها علامات خطر حمراء تشير إلى احتقان زواجي صامت. الاعتراف بوجود فجوة واللجوء المبكر للتوعية أو استشارة المتخصصين في العلاقات ليس دليلاً على الفشل، بل هو قمة الوعي والشجاعة لإنقاذ الشراكة المقدسة وإعادتها لمسارها الصحي الحميم." },
+            { title: "10. تدمير الموروثات الخاطئة: تنقية الذهن من أوهام الشاشات", meta: "⏱️ 6 دقائق قراءة • 💡 وعي فكري ونفسي", excerpt: "الأفلام الإباحية والمشاهد الرومانسية المبالغ فيها في الدراما تصنع سقف توقعات وهمي وخيالي يدمر العلاقات الواقعية...", image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=800", text: "المشاهد الإباحية والمبالغات الرومانسية في السينما تصنع سقف توقعات وهمي، غير منطقي وخيالي يدمر العلاقات الواقعية. تروج هذه الشاشات لأجساد مثالية خالية من العيوب، وأداء ميكانيكي مستمر دون تعب، مما يجعل الزوجين يشعران بالإحباط وعدم الرضا عن حياتهما الطبيعية. تنقية الذهن من هذه السموم البصرية، وفهم أن العلاقة الحقيقية مبنية على المشاعر الصادقة، التدرج، والملاءمة النفسية هو أول خطوة لحماية استقرار الفراش الزوجي." },
+            { title: "11. التوازن المفقود: كيف تنسق بين ضغوط التربية والوفاء الحميم؟", meta: "⏱️ 6 دقائق قراءة • 💡 حلول لتربية والأزواج", excerpt: "دخول الأطفال إلى حياتنا يمثل بهجة كبرى، ولكنه يستهلك طاقة الآباء والأمهات العاطفية والجسدية، مما يهمش العلاقة...", image: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?q=80&w=800", text: "دخول الأطفال إلى حياة الزوجين يمثل بهجة كبرى، ولكنه يستهلك الكثير من الطاقة العاطفية والجسدية، مما يهمش العلاقة الزوجية الخاصة ويجعلها في ذيل القائمة. التوازن الذكي يتطلب وضع حدود صارمة لخصوصية غرفة النوم، تنظيم مواعيد نوم الأطفال، والاتفاق الدائم بين الزوجين على اقتطاع أوقات مقدسة وخاصة لهما منفردين طوال الأسبوع، لإدراك أن الحفاظ على عمق وسعادة الشراكة الحميمة هو الأمان الحقيقي لتربية الأطفال في بيئة متزنة." }
+        ];
+        const grid = document.getElementById('articlesGrid');
+        articlesData.forEach((article, index) => {
+            const card = document.createElement('div');
+            card.className = 'article-card';
+            card.setAttribute('onclick', `openArticle(${index})`);
+            card.innerHTML = `<img src="${article.image}" class="card-img" alt="${article.title}"><div class="card-body"><span class="card-meta">${article.meta}</span><h3 class="card-title">${article.title}</h3><p class="card-excerpt">${article.excerpt}</p><span class="read-btn">اقرأ المقال كاملاً ←</span></div>`;
+            grid.appendChild(card);
+        });
+        const modal = document.getElementById('storyModal');
+        function openArticle(index) {
+            const article = articlesData[index];
+            document.getElementById('modalImage').src = article.image;
+            document.getElementById('modalMeta').innerText = article.meta;
+            document.getElementById('modalTitle').innerText = article.title;
+            document.getElementById('modalText').innerText = article.text;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeStory() { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
+        modal.addEventListener('click', function(e) { if (e.target === modal) { closeStory(); } });
+    </script>
 </body>
 </html>

@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملاذ | من نحن</title>
+    
+    <!-- 💰 كود Google AdSense للمراجعة والإعلانات المأخوذ من الشاشة image_a4ae47.png -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1934345630453593" crossorigin="anonymous"></script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght=300;400;600;700&family=Amiri+Quran&display=swap');
         :root { --bg-color: #121214; --card-bg: #1c1b1f; --accent-color: #d4a373; --text-main: #f4f4f6; --text-muted: #a0a0a8; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.9; padding-bottom: 60px; }
         header { background-color: rgba(28, 27, 31, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(214, 163, 115, 0.1); }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
-        .logo { font-size: 26px; font-weight: 700; color: var(--accent-color); text-decoration: none; }
-        .nav-links { display: flex; gap: 20px; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        .logo { font-family: 'Amiri Quran', serif; font-size: 34px; font-weight: 400; color: var(--accent-color); text-decoration: none; text-shadow: 0 0 10px rgba(214, 163, 115, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.8); transition: transform 0.3s ease, text-shadow 0.3s ease; display: inline-block; }
+        .logo:hover { transform: scale(1.05); text-shadow: 0 0 20px rgba(214, 163, 115, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.8); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
         .nav-links a { color: var(--text-main); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.3s; padding: 5px 10px; border-radius: 5px; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); background-color: rgba(214, 163, 115, 0.05); }
-        .main-content { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-        .about-container { background-color: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid rgba(214, 163, 115, 0.1); max-width: 800px; margin: 0 auto; }
-        .about-container h1 { color: var(--accent-color); margin-bottom: 20px; font-size: 28px; }
-        .about-container p { margin-bottom: 20px; color: #e2e2e8; font-size: 16px; }
-        @media (max-width: 768px) { .nav-container { flex-direction: column; gap: 15px; } }
+        .main-content { max-width: 800px; margin: 60px auto; padding: 0 20px; text-align: center; }
+        .about-card { background-color: var(--card-bg); border: 1px solid rgba(214, 163, 115, 0.15); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .about-title { font-size: 28px; color: var(--accent-color); margin-bottom: 20px; font-weight: 700; }
+        .about-text { font-size: 16px; color: #e2e2e8; text-align: justify; line-height: 2; margin-bottom: 25px; }
+        .vision-box { background-color: rgba(214, 163, 115, 0.03); border-right: 4px solid var(--accent-color); padding: 20px; text-align: right; border-radius: 4px; }
+        .vision-box h3 { color: var(--accent-color); font-size: 18px; margin-bottom: 8px; }
+        .vision-box p { font-size: 14px; color: var(--text-muted); }
     </style>
 </head>
 <body>
@@ -34,13 +41,14 @@
             </nav>
         </div>
     </header>
-
     <div class="main-content">
-        <div class="about-container">
-            <h1>حول منصة ملاذ</h1>
-            <p>أهلاً بك في <strong>ملاذ</strong>، المنصة الرقمية المتخصصة في تقديم محتوى راقٍ وموثوق يركز على العلاقات الزوجية والثقافة الحميمة بين الأزواج بأسلوب قصصي وتوعوي مبتكر.</p>
-            <p><strong>رؤيتنا:</strong> إننا نؤمن بأن العلاقات المستقرة والمشبعة عاطفياً وجسدياً هي أساس بناء مجتمع صحي وسعيد. لذلك يسعى موقعنا إلى كسر حواجز الخجل السلبي المحيط بهذه المواضيع، وتقديم أفكار وحلول مستندة إلى دراسات علمية ونفسية بأسلوب أدبي شيق يناسب الثقافة العربية الراقية.</p>
-            <p><strong>ماذا نقدم؟</strong> نجمع لك هنا قصصاً مستوحاة من الواقع، نصائح عاطفية وسلوكية، وإضاءات حول كيفية تطوير التواصل الحميم لضمان استمرار الشغف والحب بين الزوجين على المدى الطويل.</p>
+        <div class="about-card">
+            <h2 class="about-title">من نحن؟</h2>
+            <p class="about-text">منصة "ملاذ" هي مساحة ثقافية وتوعوية رائدة تهدف إلى تقديم المعرفة السليمة والنقدية والقصص الواقعية الهادفة في مجال العلاقات الثنائية والزوجية. نحن نؤمن بأن السعادة الأسرية تبدأ من الوعي الكامل وتكسير الموروثات الخاطئة والأنماط الروتينية الجافة بأسلوب علمي، أدبي راقٍ ومحافظ على القيم والخصوصية المشتركة.</p>
+            <div class="vision-box">
+                <h3>رؤيتنا</h3>
+                <p>أن نصبح الملاذ الأول والأكثر ثقة لكل زوجين يبحثان عن تجديد الشغف، تعميق الارتباط العاطفي والجسدي، وبناء جسور مكاشفة وصراحة مطلقة تحمي البيوت وتصنع علاقات استثنائية مشبعة.</p>
+            </div>
         </div>
     </div>
 </body>
